@@ -11,13 +11,13 @@ function AppLayout() {
   return (
     <div className="layout">
       {isLoading && <Loader />}
+
       <Header />
-
-      <main>
-        <p>Yusep</p>
-        <Outlet />
-      </main>
-
+      {!isLoading && (
+        <main>
+          <Outlet />
+        </main>
+      )}
       <CartOverview />
     </div>
   );

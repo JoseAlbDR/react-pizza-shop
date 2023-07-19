@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         element: <Cart />,
       },
       {
-        patch: "/order/new",
+        path: "/order/new",
         element: <CreateOrder />,
       },
       {
