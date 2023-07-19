@@ -15,12 +15,8 @@ function Menu() {
 }
 
 export async function loader() {
-  try {
-    const menu = await getMenu();
-    return menu;
-  } catch (e) {
-    console.error(e.message);
-  }
+  const menu = await getMenu();
+  return menu;
 }
 
 export default Menu;
