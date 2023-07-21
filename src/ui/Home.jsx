@@ -17,7 +17,7 @@ function Home() {
         <CreateUser />
       ) : (
         <Button to="/menu" type="primary">
-          Back to Menu
+          Back to Menu, {username}
         </Button>
       )}
     </div>
