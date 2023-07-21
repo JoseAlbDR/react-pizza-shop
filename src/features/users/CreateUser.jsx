@@ -8,6 +8,7 @@ function CreateUser() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (!username) return;
     dispatch(updateName(username));
     setUsername('');
   }
