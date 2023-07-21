@@ -1,12 +1,13 @@
 // Test ID: IIDSAT
 
-import { useLoaderData } from "react-router-dom";
-import { getOrder } from "../../services/apiRestaurant";
+import { useLoaderData } from 'react-router-dom';
+import { getOrder } from '../../services/apiRestaurant';
+import OrderItem from './OrderItem';
 import {
   calcMinutesLeft,
   formatCurrency,
   formatDate,
-} from "../../utils/helpers";
+} from '../../utils/helpers';
 
 function Order() {
   // Everyone can search for all orders, so for privacy reasons we're gonna gonna exclude names or address, these are only for the restaurant staff
@@ -15,34 +16,50 @@ function Order() {
   const deliveryIn = calcMinutesLeft(orderData.estimatedDelivery);
 
   return (
-    <div>
-      <div>
-        <h2>Status</h2>
+    <div className="space-y-8 px-4 py-6">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h2 className="text-xl font-semibold">Order #{orderData.id} status</h2>
 
-        <div>
-          {orderData.priority && <span>Priority </span>}
-          <span>{orderData.status} order</span>
+        <div className="space-x-2">
+          {orderData.priority && (
+            <span className="rounded-full bg-red-500 px-3 text-sm font-semibold uppercase tracking-wide text-red-50">
+              Priority
+            </span>
+          )}
+          <span className="rounded-full bg-green-500 px-3 text-sm font-semibold uppercase tracking-wide text-green-50">
+            {orderData.status} order
+          </span>
         </div>
       </div>
 
-      <div>
-        <p>
+      <div className="flex flex-wrap items-center justify-between gap-2 bg-stone-200 px-6 py-5">
+        <p className="font-medium">
           {deliveryIn >= 0
             ? `Only ${calcMinutesLeft(
-                orderData.estimatedDelivery
+                orderData.estimatedDelivery,
               )} minutes left 😃`
-            : "Order should have arrived"}
+            : 'Order should have arrived'}
         </p>
-        <p>(Estimated delivery: {formatDate(orderData.estimatedDelivery)})</p>
+        <p className="text-xs text-stone-500">
+          (Estimated delivery: {formatDate(orderData.estimatedDelivery)})
+        </p>
       </div>
-
-      <div>
-        <p>Price pizza: {formatCurrency(orderData.orderPrice)}</p>
+      <ul className="divide-y divide-stone-200 border-b border-t">
+        {orderData.cart.map((pizza) => (
+          <OrderItem item={pizza} key={pizza.id} />
+        ))}
+      </ul>
+      <div className="space-y-2 bg-stone-200 px-6 py-5">
+        <p className="text-sm font-medium text-stone-600">
+          Price pizza: {formatCurrency(orderData.orderPrice)}
+        </p>
         {orderData.priority && (
-          <p>Price priority: {formatCurrency(orderData.priorityPrice)}</p>
+          <p className="text-sm font-medium text-stone-600">
+            Price priority: {formatCurrency(orderData.priorityPrice)}
+          </p>
         )}
-        <p>
-          To pay on delivery:{" "}
+        <p className="font-bold">
+          To pay on delivery:{' '}
           {formatCurrency(orderData.orderPrice + orderData.priorityPrice)}
         </p>
       </div>
