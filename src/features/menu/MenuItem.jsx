@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../ui/Button';
 import { formatCurrency } from '../../utils/helpers';
 import { addPizza } from '../cart/cartSlice';
@@ -7,7 +7,9 @@ import DeleteItem from '../cart/DeleteItem';
 function MenuItem({ pizza }) {
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
   const dispatch = useDispatch();
-
+  const pizzaInCart = useSelector((state) =>
+    state.cart.cart.find((pizza) => pizza.pizzaId === id),
+  );
   function handleAddPizza() {
     dispatch(
       addPizza({
@@ -42,8 +44,7 @@ function MenuItem({ pizza }) {
           )}
           {!soldOut && (
             <div className="flex gap-5">
-              {}
-              <DeleteItem></DeleteItem>
+              {pizzaInCart && <DeleteItem id={id} />}
               <Button type="small" onClick={handleAddPizza}>
                 Add to cart
               </Button>
