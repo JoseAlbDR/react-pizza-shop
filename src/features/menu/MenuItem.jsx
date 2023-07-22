@@ -39,7 +39,7 @@ function MenuItem({ pizza }) {
               Sold out
             </p>
           )}
-
+          {}
           {!soldOut && (
             <Button type="small" onClick={handleAddPizza}>
               Add to cart
