@@ -22,14 +22,16 @@ function CartItem({ item }) {
         {quantity}&times; {name}
       </p>
       <div className="flex items-center justify-between sm:gap-6">
-        <Button type="small" onClick={handleDecrease}>
-          -
-        </Button>
-        <p>{quantity}</p>
-        <Button type="small" onClick={handleIncrease}>
-          +
-        </Button>
         <p>{formatCurrency(totalPrice)}</p>
+        <div className="flex items-center gap-3 ">
+          <Button type="round" onClick={handleDecrease}>
+            -
+          </Button>
+          <p>{quantity}</p>
+          <Button type="round" onClick={handleIncrease}>
+            +
+          </Button>
+        </div>
         <DeleteItem id={pizzaId} />
       </div>
     </li>
