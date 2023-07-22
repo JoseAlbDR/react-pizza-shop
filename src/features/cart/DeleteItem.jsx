@@ -10,7 +10,7 @@ function DeleteItem({ id }) {
   }
 
   return (
-    <div>
+    <div className="self-end">
       <Button onClick={handleDelete} type="small">
         Delete
       </Button>
