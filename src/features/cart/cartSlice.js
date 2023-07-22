@@ -23,7 +23,6 @@ const cartSlice = createSlice({
       );
       if (pizza) {
         pizza.quantity = pizza.quantity + 1;
-        return;
       } else {
         state.cart.push(action.payload);
       }
@@ -46,7 +45,13 @@ const cartSlice = createSlice({
       );
       if (pizza.quantity === 0) return;
       pizza.quantity--;
-      pizza.totalPrice = pizza.quantity * pizza.unitPrice;
+      if (pizza.quantity === 0) {
+        state.cart = state.cart.filter(
+          (pizza) => pizza.pizzaId !== action.payload,
+        );
+      } else {
+        pizza.totalPrice = pizza.quantity * pizza.unitPrice;
+      }
     },
     clearCart(state, action) {
       state.cart = [];
