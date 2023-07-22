@@ -18,6 +18,8 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addPizza(state, action) {
+      if (state.cart.find((pizza) => pizza.pizzaId === action.payload.pizzaId))
+        return;
       state.cart.push(action.payload);
     },
     deletePizza(state, action) {
