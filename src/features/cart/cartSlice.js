@@ -18,9 +18,15 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addPizza(state, action) {
-      if (state.cart.find((pizza) => pizza.pizzaId === action.payload.pizzaId))
+      const pizza = state.cart.find(
+        (pizza) => pizza.pizzaId === action.payload.pizzaId,
+      );
+      if (pizza) {
+        pizza.quantity = pizza.quantity + 1;
         return;
-      state.cart.push(action.payload);
+      } else {
+        state.cart.push(action.payload);
+      }
     },
     deletePizza(state, action) {
       state.cart = state.cart.filter(
