@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import Button from '../../ui/Button';
 import { formatCurrency } from '../../utils/helpers';
 import { addPizza } from '../cart/cartSlice';
+import DeleteItem from '../cart/DeleteItem';
 
 function MenuItem({ pizza }) {
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
@@ -39,11 +40,14 @@ function MenuItem({ pizza }) {
               Sold out
             </p>
           )}
-          {}
           {!soldOut && (
-            <Button type="small" onClick={handleAddPizza}>
-              Add to cart
-            </Button>
+            <div className="flex gap-5">
+              {}
+              <DeleteItem></DeleteItem>
+              <Button type="small" onClick={handleAddPizza}>
+                Add to cart
+              </Button>
+            </div>
           )}
         </div>
       </div>

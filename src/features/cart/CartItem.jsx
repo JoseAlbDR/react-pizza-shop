@@ -1,19 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Button from '../../ui/Button';
 import { formatCurrency } from '../../utils/helpers';
-import {
-  deletePizza,
-  increasePizzaQuantity,
-  decreasePizzaQuantity,
-} from './cartSlice';
+import { increasePizzaQuantity, decreasePizzaQuantity } from './cartSlice';
+import DeleteItem from './DeleteItem';
 
 function CartItem({ item }) {
   const { pizzaId, name, quantity, totalPrice } = item;
   const dispatch = useDispatch();
-
-  function handleDelete() {
-    dispatch(deletePizza(pizzaId));
-  }
 
   function handleIncrease() {
     dispatch(increasePizzaQuantity(pizzaId));
@@ -37,9 +30,7 @@ function CartItem({ item }) {
           +
         </Button>
         <p>{formatCurrency(totalPrice)}</p>
-        <Button onClick={handleDelete} type="small">
-          Delete
-        </Button>
+        <DeleteItem id={pizzaId} />
       </div>
     </li>
   );

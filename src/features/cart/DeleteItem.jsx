@@ -1,9 +1,17 @@
+import { useDispatch } from 'react-redux';
 import Button from '../../ui/Button';
+import { deletePizza } from './cartSlice';
 
-function DeleteItem({ onClick }) {
+function DeleteItem({ id }) {
+  const dispatch = useDispatch();
+
+  function handleDelete() {
+    dispatch(deletePizza(id));
+  }
+
   return (
     <div>
-      <Button onClick={onClick} type="small">
+      <Button onClick={handleDelete} type="small">
         Delete
       </Button>
     </div>
