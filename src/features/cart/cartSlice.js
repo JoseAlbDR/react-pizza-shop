@@ -69,3 +69,7 @@ export const getTotalCartPrice = (state) =>
     (total, item) => (total += item.unitPrice * item.quantity),
     0,
   );
+
+// Recieves id from useSelector hook
+export const getPizzaById = (id) => (state) =>
+  state.cart.cart.find((pizza) => pizza.pizzaId === id);
