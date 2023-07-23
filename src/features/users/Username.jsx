@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux';
-import { getUsername } from './userSlice';
+import { getUser } from './userSlice';
 
 function Username() {
-  const username = useSelector(getUsername);
+  const user = useSelector(getUser);
 
   return (
     <div className="hidden text-sm font-semibold md:block">
-      {username || 'Guest'}
+      {user.username || 'Guest'}
     </div>
   );
 }

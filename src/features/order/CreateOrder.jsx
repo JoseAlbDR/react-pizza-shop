@@ -3,7 +3,7 @@ import { Form, redirect, useActionData, useNavigation } from 'react-router-dom';
 import { createOrder } from '../../services/apiRestaurant';
 import Button from '../../ui/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAddress, getUsername } from '../users/userSlice';
+import { fetchAddress, getUser } from '../users/userSlice';
 import { clearCart, getCart, getTotalCartPrice } from '../cart/cartSlice';
 import { useState } from 'react';
 import EmptyCart from '../cart/EmptyCart';
@@ -18,7 +18,7 @@ const isValidPhone = (str) =>
 
 function CreateOrder() {
   const [withPriority, setWithPriority] = useState(false);
-  const username = useSelector(getUsername);
+  const user = useSelector(getUser);
   const cart = useSelector(getCart);
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
@@ -40,7 +40,7 @@ function CreateOrder() {
           <label className="sm:basis-40">First Name</label>
           <input
             className="input grow"
-            defaultValue={username}
+            defaultValue={user.username}
             type="text"
             name="customer"
             required
@@ -66,6 +66,7 @@ function CreateOrder() {
               className="input w-full"
               type="text"
               name="address"
+              defaultValue={user.address}
               required
             />
           </div>
