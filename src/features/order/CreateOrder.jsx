@@ -4,9 +4,11 @@ import { createOrder } from '../../services/apiRestaurant';
 import Button from '../../ui/Button';
 import { useSelector } from 'react-redux';
 import { getUsername } from '../users/userSlice';
-import { getCart } from '../cart/cartSlice';
+import { clearCart, getCart, getTotalCartPrice } from '../cart/cartSlice';
 import { useState } from 'react';
 import EmptyCart from '../cart/EmptyCart';
+import store from '../../store';
+import { formatCurrency } from '../../utils/helpers';
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
@@ -16,12 +18,15 @@ const isValidPhone = (str) =>
 
 function CreateOrder() {
   const [withPriority, setWithPriority] = useState(false);
+
   const username = useSelector(getUsername);
   const cart = useSelector(getCart);
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
-
   const formErrors = useActionData();
+  const totalCartPrice = useSelector(getTotalCartPrice);
+  const priorityPrice = withPriority ? totalCartPrice * 0.2 : 0;
+  const totalPrice = totalCartPrice + priorityPrice;
 
   if (!cart.length) return <EmptyCart />;
 
@@ -83,7 +88,9 @@ function CreateOrder() {
         <div>
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
           <Button type="primary" disabled={isSubmitting}>
-            {isSubmitting ? 'Procesing Order...' : 'Order now'}
+            {isSubmitting
+              ? 'Procesing Order...'
+              : `Order now for ${formatCurrency(totalPrice)}`}
           </Button>
         </div>
       </Form>
@@ -91,14 +98,17 @@ function CreateOrder() {
   );
 }
 
+// Form action
 export async function action({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
 
+  console.log(data);
+
   const order = {
     ...data,
     cart: JSON.parse(data.cart),
-    priority: data.priority === 'on',
+    priority: data.priority === 'true',
   };
 
   const errors = {};
@@ -110,6 +120,9 @@ export async function action({ request }) {
 
   // If everything is ok, create a new order and redirect
   const newOrder = await createOrder(order);
+
+  // Not overuse
+  store.dispatch(clearCart());
 
   return redirect(`/order/${newOrder.id}`);
 }
