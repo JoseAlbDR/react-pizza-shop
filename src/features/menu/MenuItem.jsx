@@ -42,11 +42,18 @@ function MenuItem({ pizza }) {
             </p>
           )}
           {!soldOut && (
-            <div className="flex gap-5">
+            <div className="flex gap-3">
               {/*Conditionally render DeleteItem it pizza already exist in cart */}
-              {pizzaInCart && <DeleteItem id={id} />}
+
+              {pizzaInCart && (
+                <div className="flex items-center gap-3">
+                  <DeleteItem id={id} />
+                  <span>{pizzaInCart.quantity}</span>
+                </div>
+              )}
+
               <Button type="small" onClick={handleAddPizza}>
-                Add to cart
+                Add
               </Button>
             </div>
           )}
