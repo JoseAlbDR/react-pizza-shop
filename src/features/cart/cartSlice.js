@@ -4,14 +4,15 @@ const initialState = {
   cart: [],
 };
 
+const findPizza = (state, action) =>
+  state.cart.find((pizza) => pizza.pizzaId === action.payload.pizzaId);
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
     addPizza(state, action) {
-      const pizza = state.cart.find(
-        (pizza) => pizza.pizzaId === action.payload.pizzaId,
-      );
+      const pizza = findPizza(state, action);
       if (pizza) {
         pizza.quantity = pizza.quantity + 1;
       } else {
