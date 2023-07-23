@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { getUsername } from '../users/userSlice';
 import { getCart } from '../cart/cartSlice';
 import { useState } from 'react';
+import EmptyCart from '../cart/EmptyCart';
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
@@ -21,6 +22,8 @@ function CreateOrder() {
   const isSubmitting = navigation.state === 'submitting';
 
   const formErrors = useActionData();
+
+  if (!cart.length) return <EmptyCart />;
 
   return (
     <div className="px-4 py-6">
