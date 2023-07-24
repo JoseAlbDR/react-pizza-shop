@@ -3,13 +3,11 @@
 Welcome to the React Pizza Shop repository! This is a web application built using React, Redux, and React Router to enable users to order their favorite pizzas from the comfort of their homes. The app offers various features like menu browsing, cart management, order creation, and order tracking.
 
 # Screenshots
-<div style="display: grid; grid-template-colums: repeat(2, 1fr)">
-![pizza1](https://github.com/JoseAlbDR/react-pizza-shop/assets/128265706/3368925b-462b-4eef-81f3-c5c6bccdade2)
-![pizza2](https://github.com/JoseAlbDR/react-pizza-shop/assets/128265706/e288326b-1a21-4902-bb7c-5e7ee1b358fa)
-![pizza3](https://github.com/JoseAlbDR/react-pizza-shop/assets/128265706/8d9a1468-814a-485e-b8a7-0d7d6bc92c58)
-![pizza4](https://github.com/JoseAlbDR/react-pizza-shop/assets/128265706/0dd2b61d-39db-4d00-9c25-66c9eebfd763)
-![pizza5](https://github.com/JoseAlbDR/react-pizza-shop/assets/128265706/b2ababf4-262b-42fc-86a5-086ace15d539)
-</div>
+<img src="https://github.com/JoseAlbDR/react-pizza-shop/assets/128265706/3368925b-462b-4eef-81f3-c5c6bccdade2" height="200px" width="300px"/>
+<img src="https://github.com/JoseAlbDR/react-pizza-shop/assets/128265706/e288326b-1a21-4902-bb7c-5e7ee1b358fa" height="200px" width="300px"/>
+<img src="https://github.com/JoseAlbDR/react-pizza-shop/assets/128265706/8d9a1468-814a-485e-b8a7-0d7d6bc92c58" height="200px" width="300px"/>
+<img src="https://github.com/JoseAlbDR/react-pizza-shop/assets/128265706/0dd2b61d-39db-4d00-9c25-66c9eebfd763" height="200px" width="300px"/>
+<img src="https://github.com/JoseAlbDR/react-pizza-shop/assets/128265706/b2ababf4-262b-42fc-86a5-086ace15d539" height="200px" width="300px"/>
 
 ## Features
 
